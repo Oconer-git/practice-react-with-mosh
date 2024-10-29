@@ -1,33 +1,33 @@
-import { Fragment } from "react/jsx-runtime";
-import { MouseEvent } from "react";
+import { useState } from "react";
 
-let items = [
-    'New York',
-    'Makati',
-    'Tokyo',
-    'Paris',
-    'Bangkok'
-]
-
-const handleClick = (event: MouseEvent) => {
-    console.log(event);
-}
+//function
 function ListGroup() {
+    let items = [
+        'New York',
+        'Makati',
+        'Tokyo',
+        'Paris',
+        'Bangkok'
+    ]
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
     return (
-        <Fragment>
+        <>
             <h1>List</h1>
             {items.length === 0 && <p>no items</p>}
             <ul className="w-24">    
                 {items.map((item, index) => (
-                    <li className="border border-black p-1" 
+                    <li className={`p-2 cursor-pointer ${
+                                    selectedIndex === index ? "bg-blue-400" : "bg-white"
+                                    }`}
                         key={item}
-                        onClick={handleClick}
+                        onClick={() => {setSelectedIndex(index)}}
                         >
                         {item}
                     </li>
                 ))}
             </ul>
-        </Fragment>
+        </>
     )
 }
 
