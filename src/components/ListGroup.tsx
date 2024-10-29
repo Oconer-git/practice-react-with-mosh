@@ -6,17 +6,12 @@ let items = [
     'Paris',
     'Bangkok'
 ]
-items = [];
-
-const getMessage = () => {
-    return items.length === 0 ? <p>no items</p> : null
-}
 
 function ListGroup() {
     return (
         <Fragment>
             <h1>List</h1>
-            {getMessage()}
+            {items.length === 0 && <p>no items</p>}
             <ul>    
                 {items.map((item) => (
                     <li key={item}>{item}</li>
