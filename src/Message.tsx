@@ -1,13 +1,19 @@
-import React from 'react'
-
-let count = 0;
+import React, { useState } from 'react'
 
 const Message = () => {
-    console.log('Message called', count);
-    count++;
+    const [drink, setDrink] = useState({
+        title: "Americano",
+        price: 5,
+    })
+
+    const handleClick = () => {
+        setDrink({...drink, price:6})
+    }
+
     return (
         <div>
-            Message {count}
+            <p>{drink.price}</p>
+            <button onClick={handleClick}>Button</button>
         </div>
     )
 }
