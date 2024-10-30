@@ -12,11 +12,9 @@ function ListGroup({items, heading} : Props) {
         <>
             <h1>{heading}</h1>
             {items.length === 0 && <p>no items</p>}
-            <ul className="w-24">    
+            <ul className="list-group">    
                 {items.map((item, index) => (
-                    <li className={`p-2 cursor-pointer ${
-                                    selectedIndex === index ? "bg-blue-400" : "bg-white"
-                                    }`}
+                    <li className={ selectedIndex === index ? "list-group-item active" : "list-group-item"}
                         key={item}
                         onClick={() => {setSelectedIndex(index)}}
                         >
