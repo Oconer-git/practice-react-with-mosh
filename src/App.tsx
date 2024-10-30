@@ -1,7 +1,6 @@
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
-import { useState } from "react";
 import './App.css';
 import { FcAbout } from "react-icons/fc";
 
@@ -10,10 +9,16 @@ function App() {
   const handleSelectItem = (item: string) => {
     console.log(item);
   }
+  const buttonClick = () => {
+    console.log('clicked');
+  }
+
   return (
     <div>
       <FcAbout color="pink" size="40"/>
       <ListGroup items={cities} heading="Miami" onSelectItem={handleSelectItem}/>
+      <Button onClick={buttonClick} color="primary">Click this</Button>
+
     </div>
   )
  
