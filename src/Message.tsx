@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 
 const Message = () => {
-    const [drink, setDrink] = useState({
-        title: "Americano",
-        price: 5,
+    const [customer, setCustomer] = useState({
+        name: 'John',
+        address: {
+            city: 'San Francisco',
+            zipCode: 94111
+        }
     })
 
     const handleClick = () => {
-        setDrink({...drink, price:6})
-    }
+        setCustomer({
+            ...customer,
+            address: { ...customer.address, zipCode: 2414 }
+        });
+    };
 
     return (
         <div>
-            <p>{drink.price}</p>
-            <button onClick={handleClick}>Button</button>
+              <p>{JSON.stringify(customer)}</p>
+              <button onClick={handleClick}>Button</button>
         </div>
     )
 }
