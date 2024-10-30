@@ -1,17 +1,15 @@
 
 import { useState } from 'react';
 import './App.css';
-
+import Message from './Message';
 function App() {
   // [false, true]
-  const [person, setPerson] = useState({
-    firstName: 'Donell',
-    lastName: 'Oconer'
-  })
 
   return (
     <div>
-      <h1>{person.firstName +" "+ person.lastName}</h1>
+      <Message/>
+      <Message/>
+      <Message/>
     </div>
   )
  
