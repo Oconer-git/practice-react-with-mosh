@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './ListGroup.css'
+import styles from "./ListGroup.module.css"
 
 //function
 interface Props{
@@ -14,7 +14,7 @@ function ListGroup({items, heading, onSelectItem} : Props) {
         <>
             <h1>{heading}</h1>
             {items.length === 0 && <p>no items</p>}
-            <ul className="list-group">    
+            <ul className={[styles.ListGroup, styles.container].join(' ')}>    
                 {items.map((item, index) => (
                     <li className={ selectedIndex === index ? "list-group-item active" : "list-group-item"}
                         key={item}
