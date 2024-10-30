@@ -1,6 +1,7 @@
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
+import Like from "./components/Like";
 import './App.css';
 import { FcAbout } from "react-icons/fc";
 
@@ -15,10 +16,7 @@ function App() {
 
   return (
     <div>
-      <FcAbout color="pink" size="40"/>
-      <ListGroup items={cities} heading="Miami" onSelectItem={handleSelectItem}/>
-      <Button onClick={buttonClick} color="primary">Click this</Button>
-
+      <Like onClick={() => {console.log('clicked')}}/>
     </div>
   )
  
