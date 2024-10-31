@@ -5,7 +5,6 @@ const Form = () => {
         event.preventDefault;
         console.log('clicked');
     }
-
     return (
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
