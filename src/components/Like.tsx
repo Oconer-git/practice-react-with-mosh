@@ -11,6 +11,7 @@ const Like = ({onClick}: Props) => {
         setStatus(prevStatus => !prevStatus);
         onClick();
     }
+    
     if(status) return <AiFillHeart onClick={toggle} color="#ff0000" size="40"/>;
     return <AiOutlineHeart onClick={toggle} size="40"/>;
 }
