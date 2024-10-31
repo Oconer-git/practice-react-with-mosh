@@ -49,7 +49,7 @@ function App() {
         <button onClick={handleClickPizza}>Click to add toppings</button>
       </section>
       <section>
-        {/* exerceise 3 */}
+        {/* exercise 3 */}
         {cart.items.map(item => <p>title:{item.title} quantity:{item.quantity}</p>)}
         <button onClick={handleClickCart}>Click to change quantity of cart</button>
       </section>
