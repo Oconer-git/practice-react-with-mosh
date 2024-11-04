@@ -1,21 +1,18 @@
 
-import { useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 import './App.css';
 
+const connect = () => console.log('connecting');
+const disconnect = () => console.log('disconnecting');
+
 function App() {
-  const ref = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
-    if(ref.current) ref.current.focus();
+    connect();
+    return () => disconnect();
   })
-
-  useEffect(() => {
-    document.title = 'My app'
-  })
-
   return (
     <div>
-      <input ref={ref} type="text" className="form-control" />
+     
     </div>
   )
 }
