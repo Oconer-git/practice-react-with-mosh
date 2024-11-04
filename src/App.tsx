@@ -13,13 +13,14 @@ function App() {
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
 
+  //get users and mount on the component
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
     
     axios.get<User[]>('https://jsonplaceholder.typicode.com/users',{signal: controller.signal})
-      .then((res) => {
-        setUsers(res.data);
+      .then((response) => {
+        setUsers(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -28,17 +29,34 @@ function App() {
         setLoading(false);
       });
       return () => controller.abort();
-  },[])
+    }, []);
+
+    //delete
+    const deleteUser = (user: User) => {
+      const originalUsers = [...users];
+      setUsers(users.filter(u => u.id !== user.id));
+
+      axios.delete('https://jsonplaceholder.typicode.com/users/' + user.id)
+        .catch(error =>
+          {
+            setError(error.message);
+            setUsers(originalUsers);
+          });
+    }
 
   return (
     <>
       {isLoading && <div className="spinner-border"></div>}
       {error && <p className="text-danger">{error}</p>}
-      <ul>
-        {users.map(user => <li key={user.id}>{user.name}</li>)}
+      <ul className="list-group">
+        {users.map(user => 
+          <li className="list-group-item d-flex justify-content-between" key={user.id}>
+            {user.name}
+            <button className="btn btn-outline-danger" onClick={()=> deleteUser(user)}>Delete</button>
+          </li>
+        )}
       </ul>
     </>
-
   )
 }
 
