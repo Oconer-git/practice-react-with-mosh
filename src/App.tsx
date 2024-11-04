@@ -1,13 +1,9 @@
 
 import { useState, useEffect } from 'react';
-import apiClient,{CanceledError} from './services/api-client';
-
+import { CanceledError } from './services/api-client';
+import userService,{ User } from './services/user-service';
 import './App.css';
 
-interface User{
-  id: number,
-  name: string
-}
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState('');
@@ -17,8 +13,9 @@ function App() {
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
-    
-    apiClient.get<User[]>('/users',{signal: controller.signal})
+
+    const {request, cancel} = userService.getAllUsers();
+    request
       .then((response) => {
         setUsers(response.data);
         setLoading(false);
@@ -28,20 +25,18 @@ function App() {
         setError(error.message);
         setLoading(false);
       });
-      return () => controller.abort();
-    }, []);
+      return () => cancel();
+  }, []);
 
     //delete
     const deleteUser = (user: User) => {
       const originalUsers = [...users];
       setUsers(users.filter(u => u.id !== user.id));
 
-      apiClient.delete('/users/' + user.id)
-        .catch(error =>
-          {
-            setError(error.message);
-            setUsers(originalUsers);
-          });
+      userService.deleteUser(user.id).catch(error => {
+        setError(error.message);
+        setUsers(originalUsers);
+      });
     }
 
     //add
@@ -50,7 +45,8 @@ function App() {
       const originalUsers = [...users];
       setUsers([...users, newUser])
 
-      apiClient.post('/users/',newUser)
+      userService
+        .createUser(newUser)
         .then(({data: savedUser}) => {
           setUsers([...users, savedUser])
         }) 
@@ -66,7 +62,8 @@ function App() {
       const updatedUser = {...user, name: user.name + '!'};
       setUsers(users.map(u => u.id === user.id ? updatedUser : u));
 
-      apiClient.patch('/users/' + user.id, updatedUser)
+      userService
+        .updateUser(updatedUser)
         .catch((error) => {
           setError(error.message);
           setUsers(originalUsers);
