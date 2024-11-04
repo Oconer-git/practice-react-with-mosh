@@ -5,7 +5,6 @@ import ExpenseList from './Expense-tracker/components/ExpenseList';
 import ExpenseFilter from './Expense-tracker/components/ExpenseFilter';
 import ExpenseForm from './Expense-tracker/components/ExpenseForm';
 
-export const categories = ['groceries', 'utilities', 'entertainment'];
 
 interface Expense {
   id: number;
