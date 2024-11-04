@@ -23,7 +23,6 @@ function App() {
     {id:3, description:'water', amount:53.12, category:'utilities'},
     {id:5, description:'rice sack', amount:10, category:'groceries'},
   ]);
-
   const visibleExpenses = selectedCategory 
     ? expenses.filter(expense => expense.category === selectedCategory)
     : expenses;
@@ -31,7 +30,10 @@ function App() {
   return (
     <div>
       <div className="mb-5">
-        <ExpenseForm/>
+        <ExpenseForm onSubmit={newExpense => setExpenses([
+          ...expenses, 
+          {id: expenses.length+1, ...newExpense}
+        ])}/>
       </div>
       <div className="mb-3">
         <ExpenseFilter onSelectCategory={(category) => (setSelectedCategory(category))} />
