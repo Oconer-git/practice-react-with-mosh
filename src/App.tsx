@@ -1,9 +1,7 @@
 
 import { useState } from 'react';
-import ExpandableText from './components/ExpandableText';
 import './App.css';
-import Form from './components/Form';
-import Table from './components/Table';
+import ExpenseList from './Expense-tracker/components/ExpenseList';
 
 interface Expense {
   id: number;
@@ -21,16 +19,12 @@ function App() {
     {id:5, description:'rice sack', amount:10, category:'groceries'},
   ]);
 
-  const addItem = (data: Omit<Expense, 'id'>) => {
-    const newId = expenses.length > 0 ? Math.max(...expenses.map(exp => exp.id)) + 1 : 0;
-    const newItem = {id: newId, ...data};
-    setExpenses([...expenses, newItem]);
-  }
-
   return (
     <div>
-      <Form addItem={addItem}/>
-      <Table expenses={expenses}/>
+      <ExpenseList 
+        expenses={expenses} 
+        onDelete={(id) => setExpenses(expenses.filter(e => e.id !== id))}
+      />
     </div>
   )
 }

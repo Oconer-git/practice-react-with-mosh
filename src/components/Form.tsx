@@ -26,7 +26,6 @@ const Form = ({addItem}: Props) => {
         addItem(data);
       };
     
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
