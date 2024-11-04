@@ -46,4 +46,4 @@ const ExpenseList = ({expenses, onDelete}: Props) => {
     )
 }
 
-export default ExpenseList
+export default ExpenseList;
