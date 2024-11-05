@@ -11,10 +11,9 @@ function App() {
 
   //get users and mount on the component
   useEffect(() => {
-    const controller = new AbortController();
     setLoading(true);
 
-    const {request, cancel} = userService.getAllUsers();
+    const {request, cancel} = userService.getAll<User[]>();
     request
       .then((response) => {
         setUsers(response.data);
@@ -33,20 +32,20 @@ function App() {
       const originalUsers = [...users];
       setUsers(users.filter(u => u.id !== user.id));
 
-      userService.deleteUser(user.id).catch(error => {
+      userService.delete(user.id).catch(error => {
         setError(error.message);
         setUsers(originalUsers);
       });
     }
 
-    //add
+    //create
     const addUser = () => {
       const newUser = {id:0, name:"Mosh"};
       const originalUsers = [...users];
       setUsers([...users, newUser])
 
       userService
-        .createUser(newUser)
+        .create(newUser)
         .then(({data: savedUser}) => {
           setUsers([...users, savedUser])
         }) 
@@ -63,12 +62,13 @@ function App() {
       setUsers(users.map(u => u.id === user.id ? updatedUser : u));
 
       userService
-        .updateUser(updatedUser)
+        .update(updatedUser)
         .catch((error) => {
           setError(error.message);
           setUsers(originalUsers);
         })
     }
+    
   return (
     <>
       {isLoading && <div className="spinner-border"></div>}
